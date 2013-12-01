@@ -56,7 +56,7 @@ var events = d3.dispatch.apply(this,["render", "resize", "highlight", "brush"].c
     yscale = {},
     dragging = {},
     line = d3.svg.line(),
-    axis = d3.svg.axis().orient("left").ticks(5),
+    axis = d3.svg.axis().orient("left").ticks(10),
     g, // groups for axes, brushes
     ctx = {},
     canvas = {};
@@ -122,7 +122,7 @@ pc.autoscale = function() {
     },
     "number": function(k) {
       return d3.scale.linear()
-        .domain(d3.extent(__.data, function(d) { return +d[k]; }))
+        .domain([0, 35])
         .range([h()+1, 1])
     },
     "string": function(k) {
