@@ -1,0 +1,36 @@
+<!doctype html>
+<title>Brushing Example</title>
+<link rel="stylesheet" type="text/css" href="/stylesheets/d3.parcoords.css">
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+<script src="/javascripts/d3.min.js"></script>
+
+<h1> Percentage of business type by a count of all businesses in a certain zip code</h1>
+<p><button id="btnReset">Reset Brushes</button>
+<script src="/javascripts/d3.parcoords.js"></script>
+<div id="example" class="parcoords" style="width:1400px;height:800px;"></div>
+<script>
+    // quantitative color scale
+                
+    d3.select('#btnReset').on('click', function()
+    {parcoords.brushReset();})
+    
+    var blue_to_brown = d3.scale.linear()
+      .domain([0, 100])
+        .range(["steelblue", "brown"])
+          .interpolate(d3.interpolateLab);
+          
+          var color = function(d) { return blue_to_brown(d['Administrative office, operation center or Other unclassified businesses']); };
+          
+          var parcoords = d3.parcoords()("#example")
+              .color(color)
+                  .alpha(0.9);
+                  
+                  // load csv file and create the chart
+                  d3.csv('/data/miami.csv', function(data) {
+                    parcoords
+                    .data(data)
+                    .render()
+                    .shadows()
+                    .brushable();  // enable brushing
+                });
+</script>
