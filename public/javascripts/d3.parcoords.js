@@ -122,7 +122,7 @@ pc.autoscale = function() {
     },
     "number": function(k) {
       return d3.scale.linear()
-        .domain([0, 1500])
+        .domain([0, 6000])
         .range([h()+1, 1])
     },
     "string": function(k) {
